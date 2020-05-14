@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SecondView: View {
-    @EnvironmentObject var appState: AppState
+    @EnvironmentObject var popupManager: PopupManager
     var body: some View {
         ZStack {
             Color.black.edgesIgnoringSafeArea(.all)
@@ -20,7 +20,7 @@ struct SecondView: View {
                 Divider().frame(height: 20).opacity(0)
                 
                 Button(action: {
-                    self.appState.showPopup.send(.somepopup)
+                    self.popupManager.showPopup.send(.somepopup)
                 }){
                     Text("show popup")
                         .font(Font.system(size: 14))
@@ -33,7 +33,7 @@ struct SecondView: View {
                 Divider().frame(height: 20).opacity(0)
                 
                 Button(action: {
-                    self.appState.showPopup.send(.someFullScreenPopup(text: "Some text"))
+                    self.popupManager.showPopup.send(.someFullScreenPopup(text: "Some text"))
                 }){
                     Text("show big popup")
                         .font(Font.system(size: 14))

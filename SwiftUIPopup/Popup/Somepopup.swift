@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Somepopup: View {
-    @EnvironmentObject var appState: AppState
+    @EnvironmentObject var popupManager: PopupManager
     
     var body: some View {
         ZStack {
@@ -19,7 +19,7 @@ struct Somepopup: View {
                     HStack(spacing: 0) {
                         Divider().frame(width: 5, height: 0).opacity(0)
                         Button (action: {
-                            self.appState.dismissPopup.send(true)
+                            self.popupManager.dismissPopup.send(true)
                         }) {
                             Image("xIcon")
                                 .resizable()

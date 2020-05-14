@@ -14,17 +14,19 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
     
-    var appState: AppState = AppState()
-    var popupSink: AnyCancellable? = nil
-    var dismissSink: AnyCancellable? = nil
+    var popupManager: PopupManager? = nil
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        popupManager = PopupManager(topControllerProvide: { () -> UIViewController? in
+            self.getTopController()
+        })
+        
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 
         // Create the SwiftUI view that provides the window contents.
-        let contentView = MainView().environmentObject(appState)
+        let contentView = MainView().environmentObject(popupManager!)
 
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
@@ -35,47 +37,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.appState.showPopup.send(.somepopup)
+            self.popupManager!.showPopup.send(.somepopup)
         }
-        
-        popupSink = appState.showPopup.sink(receiveValue: { intent in
-            var vc: UIViewController
-            
-            switch intent {
-            case .somepopup:
-                let view = Somepopup().environmentObject(self.appState)
-                vc = UIHostingController(rootView: view)
-                vc.modalPresentationStyle = .overCurrentContext
-            case let .someFullScreenPopup(text):
-                let view = SomeFullScreenPopup(text: text).environmentObject(self.appState)
-                vc = UIHostingController(rootView: view)
-                vc.modalPresentationStyle = .fullScreen
-            }
-            
-            self.appState.popupStack.push(intent)
-            
-            vc.view.backgroundColor = .clear
-            self.getTopController()?.present(vc, animated: true, completion: nil)
-        })
-        
-        dismissSink = appState.dismissPopup.sink(receiveValue: { _ in
-            switch self.appState.popupStack.peek() {
-            case .somepopup:
-                ///here can be added some extra animations
-                self.getTopController()?.dismiss(animated: true, completion: nil)
-            case .someFullScreenPopup:
-                ///here can be added some extra animations
-                self.getTopController()?.dismiss(animated: true, completion: nil)
-            default:
-                ///here is the default animation
-                self.getTopController()?.dismiss(animated: true, completion: nil)
-            }
-            
-            let intent = self.appState.popupStack.pop()
-            print("Popup event: dismissed popup from intent: \(String(describing: intent))")
-        })
-        
-        
     }
     
     func getTopController() -> UIViewController? {

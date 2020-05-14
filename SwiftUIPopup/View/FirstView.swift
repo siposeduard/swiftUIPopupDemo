@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FirstView: View {
-    @EnvironmentObject var appState: AppState
+    @EnvironmentObject var popupManager: PopupManager
     @State var selection: Int? = nil
     
     var body: some View {
@@ -23,7 +23,7 @@ struct FirstView: View {
                 Divider().frame(height: 20).opacity(0)
                 
                 Button(action: {
-                    self.appState.showPopup.send(.somepopup)
+                    self.popupManager.showPopup.send(.somepopup)
                 }){
                     Text("show small popup")
                         .font(Font.system(size: 14))
@@ -36,7 +36,7 @@ struct FirstView: View {
                 Divider().frame(height: 20).opacity(0)
                 
                 Button(action: {
-                    self.appState.showPopup.send(.someFullScreenPopup(text: "Some text"))
+                    self.popupManager.showPopup.send(.someFullScreenPopup(text: "Some text"))
                 }){
                     Text("show big popup")
                         .font(Font.system(size: 14))
