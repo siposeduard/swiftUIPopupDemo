@@ -17,6 +17,7 @@
 		73CBD59D246D2E4F0042C53D /* SecondView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CBD59C246D2E4F0042C53D /* SecondView.swift */; };
 		73CBD5A1246D2EC80042C53D /* Somepopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CBD5A0246D2EC80042C53D /* Somepopup.swift */; };
 		73CBD5A3246D32D40042C53D /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CBD5A2246D32D40042C53D /* AppState.swift */; };
+		73CBD5A7246D5E630042C53D /* SomeFullScreenPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 73CBD5A6246D5E630042C53D /* SomeFullScreenPopup.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		73CBD59C246D2E4F0042C53D /* SecondView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondView.swift; sourceTree = "<group>"; };
 		73CBD5A0246D2EC80042C53D /* Somepopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Somepopup.swift; sourceTree = "<group>"; };
 		73CBD5A2246D32D40042C53D /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		73CBD5A6246D5E630042C53D /* SomeFullScreenPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomeFullScreenPopup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				73CBD5A0246D2EC80042C53D /* Somepopup.swift */,
+				73CBD5A6246D5E630042C53D /* SomeFullScreenPopup.swift */,
 			);
 			path = Popup;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 				73CBD589246D2AD30042C53D /* SceneDelegate.swift in Sources */,
 				73CBD59B246D2C2A0042C53D /* MainView.swift in Sources */,
 				73CBD58B246D2AD30042C53D /* FirstView.swift in Sources */,
+				73CBD5A7246D5E630042C53D /* SomeFullScreenPopup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

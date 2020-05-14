@@ -27,6 +27,21 @@ struct SecondView: View {
                         .foregroundColor(Color.white)
                         .padding()
                 }
+                .background(Color.white.opacity(0.1))
+                .cornerRadius(8)
+                
+                Divider().frame(height: 20).opacity(0)
+                
+                Button(action: {
+                    self.appState.showPopup.send(.someFullScreenPopup(text: "Some text"))
+                }){
+                    Text("show big popup")
+                        .font(Font.system(size: 14))
+                        .foregroundColor(Color.white)
+                        .padding()
+                }
+                .background(Color.white.opacity(0.1))
+                .cornerRadius(8)
             }
         }
     }

@@ -40,14 +40,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         popupSink = appState.showPopup.sink(receiveValue: { intent in
             var vc: UIViewController
+            
             switch intent {
             case .somepopup:
                 let view = Somepopup().environmentObject(self.appState)
                 vc = UIHostingController(rootView: view)
+                vc.modalPresentationStyle = .overCurrentContext
+            case let .someFullScreenPopup(text):
+                let view = SomeFullScreenPopup(text: text).environmentObject(self.appState)
+                vc = UIHostingController(rootView: view)
+                vc.modalPresentationStyle = .fullScreen
             }
+            
             self.appState.popupStack.push(intent)
             
-            vc.modalPresentationStyle = .overCurrentContext
             vc.view.backgroundColor = .clear
             self.getTopController()?.present(vc, animated: true, completion: nil)
         })
@@ -55,10 +61,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         dismissSink = appState.dismissPopup.sink(receiveValue: { _ in
             switch self.appState.popupStack.peek() {
             case .somepopup:
-                self.getTopController()?.dismiss(animated: false, completion: nil)
+                ///here can be added some extra animations
+                self.getTopController()?.dismiss(animated: true, completion: nil)
+            case .someFullScreenPopup:
+                ///here can be added some extra animations
+                self.getTopController()?.dismiss(animated: true, completion: nil)
             default:
-                self.getTopController()?.dismiss(animated: false, completion: nil)
+                ///here is the default animation
+                self.getTopController()?.dismiss(animated: true, completion: nil)
             }
+            
+            let intent = self.appState.popupStack.pop()
+            print("Popup event: dismissed popup from intent: \(String(describing: intent))")
         })
         
         

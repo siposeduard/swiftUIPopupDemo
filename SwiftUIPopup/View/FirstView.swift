@@ -25,11 +25,26 @@ struct FirstView: View {
                 Button(action: {
                     self.appState.showPopup.send(.somepopup)
                 }){
-                    Text("show popup")
+                    Text("show small popup")
                         .font(Font.system(size: 14))
                         .foregroundColor(Color.white)
                         .padding()
                 }
+                .background(Color.black.opacity(0.1))
+                .cornerRadius(8)
+                
+                Divider().frame(height: 20).opacity(0)
+                
+                Button(action: {
+                    self.appState.showPopup.send(.someFullScreenPopup(text: "Some text"))
+                }){
+                    Text("show big popup")
+                        .font(Font.system(size: 14))
+                        .foregroundColor(Color.white)
+                        .padding()
+                }
+                .background(Color.black.opacity(0.1))
+                .cornerRadius(8)
                 
                 Divider().frame(height: 20).opacity(0)
                 
@@ -41,7 +56,10 @@ struct FirstView: View {
                         .foregroundColor(Color.white)
                         .padding()
                 }
+                .background(Color.black.opacity(0.1))
+                .cornerRadius(8)
             }
+            
             if self.selection == 1 {
                 NavigationLink(destination: SecondView(), tag: 1, selection: self.$selection){
                     EmptyView()

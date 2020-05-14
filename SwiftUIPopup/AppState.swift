@@ -18,6 +18,7 @@ class AppState: ObservableObject {
 
 enum PopupIntent {
     case somepopup
+    case someFullScreenPopup(text: String)
 }
 
 struct Stack<Element> {
